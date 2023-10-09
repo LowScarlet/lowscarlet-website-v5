@@ -14,7 +14,13 @@ import { BiLogoLinkedin } from 'react-icons/bi';
 import { Disclosure, Transition } from "@headlessui/react";
 import { TypeAnimation } from "react-type-animation";
 
-function Badge({ children, title, icon }: { children?: ReactNode, title: ReactNode, icon: ReactNode }) {
+function Badge({
+  title,
+  icon
+}: {
+  title: ReactNode,
+  icon: ReactNode
+}) {
   return (
     <span className="border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 rounded p-1 text-sm inline-flex items-center leading-4 text-neutral-900 dark:text-neutral-100 no-underline">
       <span className="pe-1">{icon}</span> {title}
@@ -154,7 +160,7 @@ export default function Home() {
       <div className="text-xl text-gray-400">
         <h2 className="pb-4 font-bold">
           I make <TypeAnimation
-            className="text-white"
+            className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"
             preRenderFirstString={true}
             sequence={[
               'websites',
