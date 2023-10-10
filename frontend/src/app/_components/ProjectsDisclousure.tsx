@@ -23,7 +23,7 @@ export default function ProjectDisclosure({
     <Disclosure>
       {({ open }) => (<>
         <Disclosure.Button className="py-1 group">
-          <div className="flex flex-row gap-0 items-center justify-between lg:justify-center mt-3 mb-3 w-full">
+          <div className="flex flex-row gap-0 items-center justify-between lg:justify-center mt-3 mb-3 w-full px-2">
             <div className="flex flex-col justify-start opacity-100 flex-none shrink-0 h-auto relative whitespace-pre w-auto mr-3">
               <h1 className={"text-lg font-medium leading-[1.3em] text-left group-hover:text-white " + (open ? "text-white" : "text-gray-300")}>
                 {title}
@@ -47,9 +47,12 @@ export default function ProjectDisclosure({
           <Disclosure.Panel>
             <div className="px-2 py-4">
               <div className="space-y-4">
-                <div className="bg-stone-950 rounded-xl py-4">
-                  <div className="flex justify-center items-center">
-                    <Image className="rounded-full" width={64} height={64} quality={100} src={icon} alt={'Project Icon'} />
+                <div className="flex items-center justify-center">
+                  <div className="relative w-full h-24 rounded-xl overflow-hidden">
+                    <Image width={100} height={100} quality={100} src={icon} alt="Foto Anda" className="absolute inset-0 w-full h-full object-cover filter blur-sm brightness-50" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Image className="rounded-full" width={64} height={64} quality={100} src={icon} alt={'Project Icon'} />
+                    </div>
                   </div>
                 </div>
                 <div className="flex overflow-hidden gap-3">
