@@ -16,7 +16,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const [love, setLove] = useState(0)
   const count_projects = 16
   const projects = [
