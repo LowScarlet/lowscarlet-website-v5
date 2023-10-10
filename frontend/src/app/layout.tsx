@@ -15,7 +15,6 @@ export const metadata: Metadata = {
     description: "Hi 👋, Im Low_Scarlet a full stack website developer from Indonesia",
     siteName: "LowScarlet"
   },
-  themeColor: "A020F0",
   colorScheme: "dark",
   creator: "Tegar Maulana Fahreza",
   publisher: "Vercel"
