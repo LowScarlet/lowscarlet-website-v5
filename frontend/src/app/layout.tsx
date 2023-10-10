@@ -13,7 +13,10 @@ export const metadata: Metadata = {
     url: "https://lowscarlet.my.id",
     title: "LowScarlet - Personal Website",
     description: "Hi 👋, I am Tegar Maulana Fahreza, a web developer from Indonesia.",
-    siteName: "LowScarlet"
+    siteName: "LowScarlet",
+    images: [
+      '/pp.png'
+    ]
   },
   colorScheme: "dark",
   creator: "Tegar Maulana Fahreza",
