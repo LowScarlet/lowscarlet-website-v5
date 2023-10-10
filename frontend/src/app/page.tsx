@@ -86,16 +86,16 @@ export default function Home() {
     <main className="max-w-md mx-auto px-4">
       <div className="py-10">
         <div className="flex items-center space-x-2">
-          <div className="h-12 w-12 bg-stone-950 rounded-full overflow-hidden">
+          <div className="h-12 w-12 rounded-full overflow-hidden">
             <Image width={100} height={100} quality={100} src={"/pp.png"} alt={"/pp.png"} />
           </div>
           <div className="grow">
-            <h1 className="text-base font-bold text-white">Tegar Maulana Fahreza</h1>
-            <p className="text-sm text-gray-400">@LowScarlet</p>
+            <h1 className="text-base font-bold dark:text-white text-gray-700">Tegar Maulana Fahreza</h1>
+            <p className="text-sm dark:text-gray-400 text-gray-500">@LowScarlet</p>
           </div>
         </div>
       </div>
-      <div className="text-xl text-gray-400">
+      <div className="text-xl dark:text-gray-400 text-gray-700">
         <h2 className="pb-4 font-bold">
           I make <TypeAnimation
             className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"
@@ -118,14 +118,14 @@ export default function Home() {
           I'm Tegar, an Indonesian web developer with a deep passion for technology. I enjoy crafting functional and visually appealing websites.
         </p>
         <p>
-          Currently working in a small and messing project with <Badge title="Next.js" icon={<TbBrandNextjs />}></Badge>, <Badge title="Express.js" icon={<SiExpress />}></Badge>, <Badge title="Prisa ORM" icon={<SiPrisma />}></Badge> some other tooling.
+          Currently working in a small and messing project with <Badge title="Next.js" icon={<TbBrandNextjs />}></Badge>, <Badge title="Express.js" icon={<SiExpress />}></Badge>, <Badge title="Prisma ORM" icon={<SiPrisma />}></Badge> some other tooling.
         </p>
       </div>
       <div className="py-8">
         <div className="flex flex-row mt-3 gap-3 overflow-x-auto py-2">
           {
             social_media.map((item, index) => (
-              <Link target="_blank" key={index} href={item.href} className="flex flex-row items-center justify-start gap-2.5 text-white transition duration-300 ease-in-out bg-neutral-700 hover:bg-neutral-900 rounded-md px-3 py-2.5">
+              <Link target="_blank" key={index} href={item.href} className="flex flex-row items-center justify-start gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-3 py-2.5">
                 {item.icon}
               </Link>
             ))
@@ -133,7 +133,7 @@ export default function Home() {
         </div>
       </div>
       <div className="pb-10">
-        <h1 className="text-2xl font-bold">Projects ({count_projects})</h1>
+        <h1 className="text-2xl font-bold dark:text-white text-gray-700">Projects ({count_projects})</h1>
         <div className="flex flex-col py-4">
           {
             projects.map((item, index) => (
@@ -149,7 +149,7 @@ export default function Home() {
             ))
           }
         </div>
-        <Link href={""} className="flex flex-row items-center justify-center gap-2.5 text-white transition duration-300 ease-in-out bg-neutral-700 hover:bg-neutral-900 rounded-md px-1.5 py-1.5">
+        <Link href={""} className="flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
           <MdOutlineArrowDownward className='' /> Load More..
         </Link>
       </div>
