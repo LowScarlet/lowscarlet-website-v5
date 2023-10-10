@@ -28,7 +28,7 @@ function Badge({
   )
 }
 
-function ProjectAccordion({
+function ProjectDisclosure({
   children,
   title,
   icon,
@@ -144,6 +144,28 @@ export default function Home() {
       href: '/projects/chatify',
     },
   ]
+  const social_media = [
+    {
+      href: 'https://github.com/LowScarlet',
+      icon: <FiGithub className='text-2xl' />,
+    },
+    {
+      href: 'https://www.instagram.com/low_scarlet',
+      icon: <FiInstagram className='text-2xl' />,
+    },
+    {
+      href: 'https://www.linkedin.com/in/tegar-maulana-fahreza-04615a221',
+      icon: <BiLogoLinkedin className='text-2xl' />,
+    },
+    {
+      href: 'https://wa.me/6281270634992',
+      icon: <MdWhatsapp className='text-2xl' />,
+    },
+    {
+      href: 'mailto:tegarmaulanafahreza.email@gmail.com',
+      icon: <FiMail className='text-2xl' />,
+    },
+  ]
   return (<>
     <main className="max-w-md mx-auto px-4">
       <div className="py-10">
@@ -185,21 +207,13 @@ export default function Home() {
       </div>
       <div className="py-8">
         <div className="flex flex-row mt-3 gap-3 overflow-x-auto py-2">
-          <Link href={""} className="flex flex-row items-center justify-start gap-2.5 text-white transition duration-300 ease-in-out bg-neutral-700 hover:bg-neutral-900 rounded-md px-3 py-2.5">
-            <FiGithub className='text-2xl' />
-          </Link>
-          <Link href={""} className="flex flex-row items-center justify-start gap-2.5 text-white transition duration-300 ease-in-out bg-neutral-700 hover:bg-neutral-900 rounded-md px-3 py-2.5">
-            <FiInstagram className='text-2xl' />
-          </Link>
-          <Link href={""} className="flex flex-row items-center justify-start gap-2.5 text-white transition duration-300 ease-in-out bg-neutral-700 hover:bg-neutral-900 rounded-md px-3 py-2.5">
-            <BiLogoLinkedin className='text-2xl' />
-          </Link>
-          <Link href={""} className="flex flex-row items-center justify-start gap-2.5 text-white transition duration-300 ease-in-out bg-neutral-700 hover:bg-neutral-900 rounded-md px-3 py-2.5">
-            <FiMail className='text-2xl' />
-          </Link>
-          <Link href={""} className="flex flex-row items-center justify-start gap-2.5 text-white transition duration-300 ease-in-out bg-neutral-700 hover:bg-neutral-900 rounded-md px-3 py-2.5">
-            <MdWhatsapp className='text-2xl' />
-          </Link>
+          {
+            social_media.map((item, index) => (
+              <Link target="_blank" key={index} href={item.href} className="flex flex-row items-center justify-start gap-2.5 text-white transition duration-300 ease-in-out bg-neutral-700 hover:bg-neutral-900 rounded-md px-3 py-2.5">
+                {item.icon}
+              </Link>
+            ))
+          }
         </div>
       </div>
       <div className="pb-10">
@@ -207,7 +221,7 @@ export default function Home() {
         <div className="flex flex-col py-4">
           {
             projects.map((item, index) => (
-              <ProjectAccordion
+              <ProjectDisclosure
                 key={index}
                 title={item.title}
                 icon={item.icon}
@@ -215,7 +229,7 @@ export default function Home() {
                 href={item.href}
               >
                 {item.context}
-              </ProjectAccordion>
+              </ProjectDisclosure>
             ))
           }
         </div>
