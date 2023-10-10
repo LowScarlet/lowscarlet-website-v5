@@ -6,3 +6,26 @@ body {
   background-color: #111010;
   color: white
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-stone-950;
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-500;
+  @apply rounded-md
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-700;
+}
+
+::-webkit-scrollbar-thumb:active {
+  @apply bg-gray-500;
+}
