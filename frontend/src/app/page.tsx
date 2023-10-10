@@ -7,12 +7,17 @@ import { TbBrandNextjs } from 'react-icons/tb';
 import { SiExpress, SiPrisma } from 'react-icons/si';
 import { FiGithub, FiInstagram, FiMail } from 'react-icons/fi';
 import { MdOutlineArrowDownward, MdWhatsapp } from 'react-icons/md';
-import { BiLogoLinkedin } from 'react-icons/bi';
+import { BiLogoLinkedin, BiSticker } from 'react-icons/bi';
+import { AiFillHeart, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
 import { TypeAnimation } from "react-type-animation";
 import Badge from "./_components/Badge";
 import ProjectDisclosure from "./_components/ProjectsDisclousure";
+import { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(true)
+  const [love, setLove] = useState(0)
   const count_projects = 16
   const projects = [
     {
@@ -83,7 +88,7 @@ export default function Home() {
     },
   ]
   return (<>
-    <main className="max-w-md mx-auto px-4">
+    <main className="max-w-md mx-auto px-4 select-none">
       <div className="py-10">
         <div className="flex items-center space-x-2">
           <div className="h-12 w-12 rounded-full overflow-hidden">
@@ -93,6 +98,20 @@ export default function Home() {
             <h1 className="text-base font-bold dark:text-white text-gray-700">Tegar Maulana Fahreza</h1>
             <p className="text-sm dark:text-gray-400 text-gray-500">@LowScarlet</p>
           </div>
+          <button
+            onClick={() => {
+              setIsOpen(true)
+            }}
+            className="transition duration-300 ease-in-out h-12 w-12 rounded-full overflow-hidden flex justify-center items-center group hover:cursor-pointer dark:text-gray-400 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 dark:hover:text-white hover:brightness-150"
+          >
+            <div>
+              <div className="flex justify-center items-center dark:text-current text-violet-500">
+                <AiOutlineHeart className="text-2xl font-bold group-hover:hidden" />
+                <AiFillHeart className="text-2xl font-bold group-hover:inline hidden" />
+              </div>
+              <h1 className="text-xs font-bold text-center">{love}</h1>
+            </div>
+          </button>
         </div>
       </div>
       <div className="text-xl dark:text-gray-400 text-gray-700">
@@ -154,5 +173,74 @@ export default function Home() {
         </Link>
       </div>
     </main>
+
+
+    <Transition appear show={isOpen} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={() => { setIsOpen(false) }}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-black bg-opacity-75" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-2xl bg-dark-calm p-4 text-sm text-left align-middle shadow-xl transition-all">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 mb-4"
+                >
+                  Comments
+                </Dialog.Title>
+                <div className="flex flex-col-reverse h-64 max-h-72 overflow-y-scroll">
+                  {
+                    [1, 2, 3, 4, 5,6,7,8,9].map((item, index) => (
+                      <div key={index} className="mt-4">
+                        <div className="flex items-center gap-2 text-gray-500">
+                          <div className="h-8 w-8 rounded-full bg-gray-700"></div>
+                          <div className="grow text-xs text-gray-200">
+                            <h1 className="font-bold">Tegar Maulana Fahreza</h1>
+                            <p className="text-gray-300">Hello World!</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  }
+                </div>
+                <div className="mt-4 flex justify-center items-center gap-2 bg-stone-950 rounded-2xl py-2 px-4 text-gray-500">
+                  <div className="h-8 w-8 rounded-full bg-dark-calm"></div>
+                  <div className="grow">
+                    <input type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Komentar..." />
+                  </div>
+                  <div className="flex gap-2">
+                    <button>
+                      <BiSticker className='text-2xl' />
+                    </button>
+                    <button>
+                      <AiOutlineSend className='text-2xl' />
+                    </button>
+                  </div>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </div>
+      </Dialog>
+    </Transition>
   </>)
 }
