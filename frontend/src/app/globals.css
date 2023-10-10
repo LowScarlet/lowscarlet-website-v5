@@ -2,23 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background-color: #fff; /* Warna latar belakang tema terang */
-  --text-color: #111010; /* Warna teks tema terang */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #111010; /* Warna latar belakang tema gelap */
-    --text-color: #fff; /* Warna teks tema gelap */
-  }
-}
-
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
 ::-webkit-scrollbar {
   width: 2px;
 }

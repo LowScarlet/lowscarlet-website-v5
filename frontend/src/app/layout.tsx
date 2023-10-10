@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className='transition duration-300 ease-in-out dark:bg-dark-calm bg-white'>
       <body className={hanken_grotesk.className}>{children}</body>
     </html>
   )
