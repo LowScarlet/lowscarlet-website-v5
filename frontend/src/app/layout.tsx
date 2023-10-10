@@ -18,6 +18,9 @@ export const metadata: Metadata = {
       '/pp.png'
     ]
   },
+  twitter: {
+    card: 'summary',
+  },
   colorScheme: "dark",
   creator: "Tegar Maulana Fahreza",
   publisher: "Vercel"
