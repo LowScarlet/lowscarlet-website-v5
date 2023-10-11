@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 "use client"
 
@@ -282,7 +283,8 @@ export default function Home() {
                               item.type === 'text' ? (
                                 <p className="text-gray-300">{item.content}</p>
                               ) : (<>
-                                <Image className="rounded-xl" width={100} height={100} src={"/images/stickers/dance-blob.png"} alt={""} />
+                                {/* <Image className="rounded-xl" width={100} height={100} src={"/images/stickers/dance-blob.png"} alt={""} /> */}
+                                <img className="rounded-xl" src="/images/stickers/dance-blob.png" alt="" width={100} height={100} />
                               </>)
                             }
                           </div>
