@@ -8,7 +8,7 @@ import { SiExpress, SiPrisma } from 'react-icons/si';
 import { FiGithub, FiInstagram, FiMail } from 'react-icons/fi';
 import { MdOutlineArrowDownward, MdWhatsapp } from 'react-icons/md';
 import { BiLogoLinkedin, BiSticker } from 'react-icons/bi';
-import { AiFillHeart, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineClose, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
 import { TypeAnimation } from "react-type-animation";
 import Badge from "./_components/Badge";
 import ProjectDisclosure from "./_components/ProjectsDisclousure";
@@ -18,6 +18,50 @@ import { Dialog, Transition } from "@headlessui/react";
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false)
   const [love, setLove] = useState(0)
+  const chats = [
+    {
+      id: 6,
+      avatar: null,
+      username: 'Sahrul',
+      type: 'sticker',
+      content: 'love-ya'
+    },
+    {
+      id: 5,
+      avatar: null,
+      username: 'Sahrul',
+      type: 'text',
+      content: 'no prob'
+    },
+    {
+      id: 4,
+      avatar: null,
+      username: 'LowScarlet',
+      type: 'text',
+      content: 'thanku'
+    },
+    {
+      id: 3,
+      avatar: null,
+      username: 'Sahrul',
+      type: 'sticker',
+      content: 'love-ya'
+    },
+    {
+      id: 2,
+      avatar: null,
+      username: 'LowScarlet',
+      type: 'sticker',
+      content: 'love-ya'
+    },
+    {
+      id: 1,
+      avatar: null,
+      username: 'LowScarlet',
+      type: 'text',
+      content: 'Good Game!!'
+    },
+  ]
   const count_projects = 16
   const projects = [
     {
@@ -202,20 +246,45 @@ export default function Home() {
             >
               <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-2xl bg-dark-calm p-4 text-sm text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 mb-4"
+                  as="div"
+                  className="flex justify-center mb-2"
                 >
-                  Comments
+                  <div className="grow text-lg font-bold">
+                    Comments
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <button onClick={() => { setIsOpen(false) }}>
+                      <AiOutlineClose className="text-2xl" />
+                    </button>
+                  </div>
                 </Dialog.Title>
                 <div className="flex flex-col-reverse h-64 max-h-72 overflow-y-scroll">
                   {
-                    [1, 2, 3, 4, 5,6,7,8,9].map((item, index) => (
-                      <div key={index} className="mt-4">
-                        <div className="flex items-center gap-2 text-gray-500">
-                          <div className="h-8 w-8 rounded-full bg-gray-700"></div>
+                    chats.map((item, index) => (
+                      <div key={item.id} className={chats[(index + 1)]?.username === item.username ? 'mt-1' : 'mt-4'}>
+                        <div className="flex gap-2 text-gray-500">
+                          {
+                            chats[(index + 1)]?.username === item.username ? (
+                              <div className="w-8"></div>
+                            ) : (
+                              <div className="h-8 w-8 rounded-full bg-gray-700"></div>
+                            )
+                          }
                           <div className="grow text-xs text-gray-200">
-                            <h1 className="font-bold">Tegar Maulana Fahreza</h1>
-                            <p className="text-gray-300">Hello World!</p>
+                            {
+                              chats[(index + 1)]?.username === item.username ? (
+                                null
+                              ) : (
+                                <h1 className="font-bold">{item.username}</h1>
+                              )
+                            }
+                            {
+                              item.type === 'text' ? (
+                                <p className="text-gray-300">{item.content}</p>
+                              ) : (<>
+                                <Image className="rounded-xl" width={100} height={100} src={"/images/stickers/dance-blob.png"} alt={""} />
+                              </>)
+                            }
                           </div>
                         </div>
                       </div>
@@ -225,7 +294,7 @@ export default function Home() {
                 <div className="mt-4 flex justify-center items-center gap-2 bg-stone-950 rounded-2xl py-2 px-4 text-gray-500">
                   <div className="h-8 w-8 rounded-full bg-dark-calm"></div>
                   <div className="grow">
-                    <input type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Komentar..." />
+                    <input type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Comments..." />
                   </div>
                   <div className="flex gap-2">
                     <button>
