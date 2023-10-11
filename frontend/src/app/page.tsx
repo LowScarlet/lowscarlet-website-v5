@@ -18,6 +18,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isStickersOpen, setIsStickersOpen] = useState(false)
   const [love, setLove] = useState(0)
   const chats = [
     {
@@ -132,6 +133,13 @@ export default function Home() {
       icon: <FiMail className='text-2xl' />,
     },
   ]
+  const stickers = [
+    'cool-blob.png',
+    'dance-blob.png',
+    'happy-ghast.png',
+    'miku-w.png',
+    'party.png'
+  ]
   return (<>
     <main className="max-w-md mx-auto px-4 select-none">
       <div className="py-10">
@@ -182,7 +190,7 @@ export default function Home() {
           I'm Tegar, an Indonesian web developer with a deep passion for technology. I enjoy crafting functional and visually appealing websites.
         </p>
         <p>
-          Currently working in a small and messing project with <Badge title="Next.js" icon={<TbBrandNextjs />}></Badge>, <Badge title="Express.js" icon={<SiExpress />}></Badge>, <Badge title="Prisma ORM" icon={<SiPrisma />}></Badge> some other tooling.
+          Currently working in a small and messing project with <Badge title="Next.js" icon={<TbBrandNextjs />}></Badge>, <Badge title="Express.js" icon={<SiExpress />}></Badge>, <Badge title="Prisma ORM" icon={<SiPrisma />}></Badge> & some other tooling.
         </p>
       </div>
       <div className="py-8">
@@ -293,18 +301,39 @@ export default function Home() {
                     ))
                   }
                 </div>
-                <div className="mt-4 flex justify-center items-center gap-2 bg-stone-950 rounded-2xl py-2 px-4 text-gray-500">
-                  <div className="h-8 w-8 rounded-full bg-dark-calm"></div>
-                  <div className="grow">
-                    <input type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Comments..." />
+                <div className="bg-stone-950 rounded-2xl text-gray-500">
+                  <div className={"mt-4 py-2 px-4 " + (isStickersOpen ? '' : 'hidden')}>
+                    <div className="flex">
+                      <div className="grow text-base font-bold">Stickers</div>
+                      <div className="flex justify-center items-center">
+                        <button onClick={() => { setIsStickersOpen(false) }}>
+                          <AiOutlineClose className="text-xl" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className={"h-20 grid grid-cols-4 my-4 gap-4 overflow-y-scroll"}>
+                      {
+                        stickers.map((item, index) => (
+                          <div key={index} className="flex items-center justify-center">
+                            <img width={50} height={50} src={"/images/stickers/" + item} alt="" />
+                          </div>
+                        ))
+                      }
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <button>
-                      <BiSticker className='text-2xl' />
-                    </button>
-                    <button>
-                      <AiOutlineSend className='text-2xl' />
-                    </button>
+                  <div className="mt-4 flex justify-center items-center gap-2 py-2 px-4">
+                    <div className="h-8 w-8 rounded-full bg-dark-calm"></div>
+                    <div className="grow">
+                      <input type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Comments..." />
+                    </div>
+                    <div className="flex gap-2">
+                      <button onClick={() => { setIsStickersOpen(true) }}>
+                        <BiSticker className='text-2xl' />
+                      </button>
+                      <button>
+                        <AiOutlineSend className='text-2xl' />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </Dialog.Panel>
