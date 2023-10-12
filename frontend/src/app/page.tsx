@@ -8,138 +8,88 @@ import { TbBrandNextjs } from 'react-icons/tb';
 import { SiExpress, SiPrisma } from 'react-icons/si';
 import { FiGithub, FiInstagram, FiMail } from 'react-icons/fi';
 import { MdOutlineArrowDownward, MdWhatsapp } from 'react-icons/md';
-import { BiLogoLinkedin, BiSticker } from 'react-icons/bi';
-import { AiFillHeart, AiOutlineClose, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
+import { BiLogoLinkedin } from 'react-icons/bi';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { TypeAnimation } from "react-type-animation";
 import Badge from "./_components/Badge";
 import ProjectDisclosure from "./_components/ProjectsDisclousure";
-import { Fragment, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import { useState } from "react";
+import CommentsModal from "./_components/CommentsModal";
+
+const count_projects = 16
+const projects = [
+  {
+    title: 'PumpkinProject',
+    icon: '/pp.png',
+    badges: [
+      <Badge key={0} title="Private" icon={<FiGithub />} />,
+      <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
+      <Badge key={2} title="Express.js" icon={<SiExpress />} />
+    ],
+    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    href: '/projects/pumpkinproject',
+  },
+  {
+    title: 'Pumpkincraft',
+    icon: '/pp.png',
+    badges: [
+      <Badge key={0} title="Private" icon={<FiGithub />} />,
+      <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
+      <Badge key={2} title="Express.js" icon={<SiExpress />} />
+    ],
+    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    href: '/projects/pumpkincraft',
+  },
+  {
+    title: 'Etika Chat',
+    icon: '/pp.png',
+    badges: [
+      <Badge key={0} title="Private" icon={<FiGithub />} />,
+      <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
+      <Badge key={2} title="Express.js" icon={<SiExpress />} />
+    ],
+    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    href: '/projects/etikachat',
+  },
+  {
+    title: 'Chatify',
+    icon: '/pp.png',
+    badges: [
+      <Badge key={0} title="Private" icon={<FiGithub />} />,
+      <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
+      <Badge key={2} title="Express.js" icon={<SiExpress />} />
+    ],
+    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    href: '/projects/chatify',
+  },
+]
+const social_media = [
+  {
+    href: 'https://github.com/LowScarlet',
+    icon: <FiGithub className='text-2xl' />,
+  },
+  {
+    href: 'https://www.instagram.com/low_scarlet',
+    icon: <FiInstagram className='text-2xl' />,
+  },
+  {
+    href: 'https://www.linkedin.com/in/tegar-maulana-fahreza-04615a221',
+    icon: <BiLogoLinkedin className='text-2xl' />,
+  },
+  {
+    href: 'https://wa.me/6281270634992',
+    icon: <MdWhatsapp className='text-2xl' />,
+  },
+  {
+    href: 'mailto:tegarmaulanafahreza.email@gmail.com',
+    icon: <FiMail className='text-2xl' />,
+  },
+]
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isStickersOpen, setIsStickersOpen] = useState(false)
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false)
   const [love, setLove] = useState(0)
-  const chats = [
-    {
-      id: 6,
-      avatar: null,
-      username: 'Sahrul',
-      type: 'sticker',
-      content: 'love-ya'
-    },
-    {
-      id: 5,
-      avatar: null,
-      username: 'Sahrul',
-      type: 'text',
-      content: 'no prob'
-    },
-    {
-      id: 4,
-      avatar: null,
-      username: 'LowScarlet',
-      type: 'text',
-      content: 'thanku'
-    },
-    {
-      id: 3,
-      avatar: null,
-      username: 'Sahrul',
-      type: 'sticker',
-      content: 'love-ya'
-    },
-    {
-      id: 2,
-      avatar: null,
-      username: 'LowScarlet',
-      type: 'sticker',
-      content: 'love-ya'
-    },
-    {
-      id: 1,
-      avatar: null,
-      username: 'LowScarlet',
-      type: 'text',
-      content: 'Good Game!!'
-    },
-  ]
-  const count_projects = 16
-  const projects = [
-    {
-      title: 'PumpkinProject',
-      icon: '/pp.png',
-      badges: [
-        <Badge key={0} title="Private" icon={<FiGithub />} />,
-        <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
-        <Badge key={2} title="Express.js" icon={<SiExpress />} />
-      ],
-      context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      href: '/projects/pumpkinproject',
-    },
-    {
-      title: 'Pumpkincraft',
-      icon: '/pp.png',
-      badges: [
-        <Badge key={0} title="Private" icon={<FiGithub />} />,
-        <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
-        <Badge key={2} title="Express.js" icon={<SiExpress />} />
-      ],
-      context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      href: '/projects/pumpkincraft',
-    },
-    {
-      title: 'Etika Chat',
-      icon: '/pp.png',
-      badges: [
-        <Badge key={0} title="Private" icon={<FiGithub />} />,
-        <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
-        <Badge key={2} title="Express.js" icon={<SiExpress />} />
-      ],
-      context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      href: '/projects/etikachat',
-    },
-    {
-      title: 'Chatify',
-      icon: '/pp.png',
-      badges: [
-        <Badge key={0} title="Private" icon={<FiGithub />} />,
-        <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
-        <Badge key={2} title="Express.js" icon={<SiExpress />} />
-      ],
-      context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      href: '/projects/chatify',
-    },
-  ]
-  const social_media = [
-    {
-      href: 'https://github.com/LowScarlet',
-      icon: <FiGithub className='text-2xl' />,
-    },
-    {
-      href: 'https://www.instagram.com/low_scarlet',
-      icon: <FiInstagram className='text-2xl' />,
-    },
-    {
-      href: 'https://www.linkedin.com/in/tegar-maulana-fahreza-04615a221',
-      icon: <BiLogoLinkedin className='text-2xl' />,
-    },
-    {
-      href: 'https://wa.me/6281270634992',
-      icon: <MdWhatsapp className='text-2xl' />,
-    },
-    {
-      href: 'mailto:tegarmaulanafahreza.email@gmail.com',
-      icon: <FiMail className='text-2xl' />,
-    },
-  ]
-  const stickers = [
-    'cool-blob.png',
-    'dance-blob.png',
-    'happy-ghast.png',
-    'miku-w.png',
-    'party.png'
-  ]
+
   return (<>
     <main className="max-w-md mx-auto px-4 select-none">
       <div className="py-10">
@@ -153,7 +103,7 @@ export default function Home() {
           </div>
           <button
             onClick={() => {
-              setIsOpen(true)
+              setIsCommentModalOpen(true)
             }}
             className="transition duration-300 ease-in-out h-12 w-12 rounded-full overflow-hidden flex justify-center items-center group hover:cursor-pointer dark:text-gray-400 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 dark:hover:text-white hover:brightness-150"
           >
@@ -227,120 +177,7 @@ export default function Home() {
       </div>
     </main>
 
-
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={() => { setIsOpen(false) }}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-black bg-opacity-75" />
-        </Transition.Child>
-
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <Dialog.Panel className="w-full max-w-sm transform overflow-hidden rounded-2xl bg-dark-calm p-4 text-sm text-left align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="div"
-                  className="flex justify-center mb-2"
-                >
-                  <div className="grow text-lg font-bold">
-                    Comments
-                  </div>
-                  <div className="flex justify-center items-center">
-                    <button onClick={() => { setIsOpen(false) }}>
-                      <AiOutlineClose className="text-2xl" />
-                    </button>
-                  </div>
-                </Dialog.Title>
-                <div className="flex flex-col-reverse h-64 max-h-72 overflow-y-scroll">
-                  {
-                    chats.map((item, index) => (
-                      <div key={item.id} className={chats[(index + 1)]?.username === item.username ? 'mt-1' : 'mt-4'}>
-                        <div className="flex gap-2 text-gray-500">
-                          {
-                            chats[(index + 1)]?.username === item.username ? (
-                              <div className="w-8"></div>
-                            ) : (
-                              <div className="h-8 w-8 rounded-full bg-gray-700"></div>
-                            )
-                          }
-                          <div className="grow text-xs text-gray-200">
-                            {
-                              chats[(index + 1)]?.username === item.username ? (
-                                null
-                              ) : (
-                                <h1 className="font-bold">{item.username}</h1>
-                              )
-                            }
-                            {
-                              item.type === 'text' ? (
-                                <p className="text-gray-300">{item.content}</p>
-                              ) : (<>
-                                {/* <Image className="rounded-xl" width={100} height={100} src={"/images/stickers/dance-blob.png"} alt={""} /> */}
-                                <img className="rounded-xl" src="/images/stickers/dance-blob.png" alt="" width={100} height={100} />
-                              </>)
-                            }
-                          </div>
-                        </div>
-                      </div>
-                    ))
-                  }
-                </div>
-                <div className="bg-stone-950 rounded-2xl text-gray-500">
-                  <div className={"mt-4 py-2 px-4 " + (isStickersOpen ? '' : 'hidden')}>
-                    <div className="flex">
-                      <div className="grow text-base font-bold">Stickers</div>
-                      <div className="flex justify-center items-center">
-                        <button onClick={() => { setIsStickersOpen(false) }}>
-                          <AiOutlineClose className="text-xl" />
-                        </button>
-                      </div>
-                    </div>
-                    <div className={"h-20 grid grid-cols-4 my-4 gap-4 overflow-y-scroll"}>
-                      {
-                        stickers.map((item, index) => (
-                          <div key={index} className="flex items-center justify-center">
-                            <img width={50} height={50} src={"/images/stickers/" + item} alt="" />
-                          </div>
-                        ))
-                      }
-                    </div>
-                  </div>
-                  <div className="mt-4 flex justify-center items-center gap-2 py-2 px-4">
-                    <div className="h-8 w-8 rounded-full bg-dark-calm"></div>
-                    <div className="grow">
-                      <input type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Comments..." />
-                    </div>
-                    <div className="flex gap-2">
-                      <button onClick={() => { setIsStickersOpen(true) }}>
-                        <BiSticker className='text-2xl' />
-                      </button>
-                      <button>
-                        <AiOutlineSend className='text-2xl' />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </Dialog>
-    </Transition>
+    {/* Modals */}
+    <CommentsModal isOpen={isCommentModalOpen} setIsOpen={setIsCommentModalOpen} />
   </>)
 }
