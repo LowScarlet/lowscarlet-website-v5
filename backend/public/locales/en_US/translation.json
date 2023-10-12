@@ -1,0 +1,43 @@
+{
+  "welcome-messages": {
+    "public": "Anda sedang ngapain :).",
+    "home": "Server backend khusus pumpkin project sekarang sudah online! - Proyek Pumpkin Project.",
+    "home-api": "Selamat datang di API kami.",
+    "home-api-v1": "V1 API Ready Sir!"
+  },
+  "validations": {
+    "data-not-found": "Data tidak ditemukan.",
+    "already-exist": "Data sudah ada.",
+    "only-alphanumeric-and-underscore": "Hanya dapat menerima input Huruf, Angka, Underscore & harus dimulai dengan huruf.",
+    "value-is-empty": "Input tidak boleh kosong.",
+    "require-length-min-max": "Minimal {{min}} karakter dan Maksimal {{max}} karakter.",
+    "invalid-type": "Tipe input tidak valid.",
+    "password-is-not-strong": "Password minimal harus memiliki Angka, Huruf, Huruf Besar Kecil & Karakter lainnya seperti (_, -, +).",
+    "success-login": "Masuk berhasil.",
+    "success-register": "Berhasil terdaftar sebagai member.",
+    "success-logout": "Berhasil Keluar",
+    
+    "success-follow": "Anda mengikuti {{username}}.",
+    "success-unfollow": "Anda berhenti mengikuti {{username}}.",
+    "success-update-account": "Berhasil memperbarui data akun.",
+    "success-update-profile": "Berhasil memperbarui data profil.",
+    "success-update-password": "Berhasil mengubah password akun.",
+
+    "user-not-found": "User tidak ditemukan."
+  },
+  "utils": {
+    "exceptions": {
+      "validation-exception": "Input yang diberikan tidak valid.",
+      "invalid-credentials": "Invalid Credentials.",
+      "forbidden": "Akses di tolak.",
+      "must-unauthorized-user": "Akses hanya dibolehkan untuk User yang sudah Authorized.",
+      "must-authorized-user": "Akses hanya dibolehkan untuk User yang belum Authorized.",
+      "role-not-found-error": "Terdapat masalah dalam melakukan validasi role, Contact Developer Segera.",
+      "role-not-allowed": "Tidak memiliki izin untuk mengakses ini."
+    },
+    "middlewares": {
+      "not-found": "404 - Anda menemukan Labirin.",
+      "file-not-found": "404 - Berkas tidak ditemukan."
+    }
+  }
+}
