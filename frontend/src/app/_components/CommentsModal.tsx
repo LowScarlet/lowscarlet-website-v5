@@ -1,10 +1,12 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
+import Image from "next/image";
 import { BiSticker } from 'react-icons/bi';
 import { AiOutlineClose, AiOutlineSend } from 'react-icons/ai';
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, Tab, Transition } from "@headlessui/react";
 
 export default function CommentsModal({
   isOpen,
@@ -119,7 +121,9 @@ export default function CommentsModal({
                             chats[(index + 1)]?.username === item.username ? (
                               <div className="w-8"></div>
                             ) : (
-                              <div className="h-8 w-8 rounded-full bg-gray-700"></div>
+                              <div className="h-8 w-8 rounded-full overflow-hidden">
+                                <Image width={100} height={100} quality={100} src={"/images/avatars/default-2.png"} alt={"/images/avatars/default-1.png"} />
+                              </div>
                             )
                           }
                           <div className="grow text-xs text-gray-200">
@@ -143,8 +147,16 @@ export default function CommentsModal({
                     ))
                   }
                 </div>
-                <div className="bg-stone-950 rounded-2xl text-gray-500">
-                  <div className={"mt-4 py-2 px-4 " + (isStickersOpen ? '' : 'hidden')}>
+                <div className="bg-stone-950 rounded-2xl text-gray-500 mt-4">
+                  <div className="flex pt-2 px-4 text-xs">
+                    <div className="grow">
+                      Comment as <span className="font-bold">Guest726</span>.
+                    </div>
+                    <div>
+                      <button>logout</button>
+                    </div>
+                  </div>
+                  <div className={"py-2 px-4 " + (isStickersOpen ? '' : 'hidden')}>
                     <div className="flex">
                       <div className="grow text-base font-bold">Stickers</div>
                       <div className="flex justify-center items-center">
@@ -156,17 +168,19 @@ export default function CommentsModal({
                     <div className={"h-20 grid grid-cols-4 my-4 gap-4 overflow-y-scroll"}>
                       {
                         stickers.map((item, index) => (
-                          <div key={index} className="flex items-center justify-center">
-                            <img width={50} height={50} src={"/images/stickers/" + item} alt="" />
-                          </div>
+                          <button key={index} onClick={() => { setIsAuthOpen(true) }}>
+                            <div className="flex items-center justify-center">
+                              <img width={50} height={50} src={"/images/stickers/" + item} alt="" />
+                            </div>
+                          </button>
                         ))
                       }
                     </div>
                   </div>
-                  <div className="mt-4 flex justify-center items-center gap-2 py-2 px-4">
+                  <div className="flex justify-center items-center gap-2 py-2 px-4">
                     <div className="h-8 w-8 rounded-full bg-dark-calm"></div>
                     <div className="grow">
-                      <input type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Comments..." />
+                      <input id="comment" name="comment" autoComplete="off" type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Comments..." />
                     </div>
                     <div className="flex gap-2">
                       <button onClick={() => { setIsStickersOpen(true) }}>
@@ -182,10 +196,9 @@ export default function CommentsModal({
             </Transition.Child>
           </div>
         </div>
+        <AuthModal isOpen={isAuthOpen} setIsOpen={setIsAuthOpen} />
       </Dialog>
     </Transition>
-
-    <AuthModal isOpen={isAuthOpen} setIsOpen={setIsAuthOpen} />
   </>)
 }
 
@@ -196,9 +209,14 @@ function AuthModal({
   isOpen: boolean,
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }) {
+  const [tab, setTab] = useState<string | null>(null)
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={() => { setIsOpen(false) }}>
+      <Dialog as="div" className="relative z-10" onClose={() => {
+        setTab(null)
+        setIsOpen(false)
+      }}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -227,23 +245,93 @@ function AuthModal({
                   as="div"
                   className="flex justify-center mb-2"
                 >
-                  <div className="grow text-lg font-bold">
-                    Authentication - Login
-                  </div>
+                  <div className="grow text-lg font-bold"></div>
                   <div className="flex justify-center items-center">
                     <button onClick={() => { setIsOpen(false) }}>
                       <AiOutlineClose className="text-2xl" />
                     </button>
                   </div>
                 </Dialog.Title>
-                <div>
-                  <div className='py-8 px-12 flex flex-col gap-4'>
-                    <input className='w-full rounded-lg text-center py-2 px-4' type="text" placeholder='Username' />
-                    <input className='w-full rounded-lg text-center py-2 px-4' type="text" placeholder='Password' />
-                    <button className="flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
-                      Login
-                    </button>
-                  </div>
+                <div className='text-center my-4'>
+                  {
+                    tab === null ? (
+                      <div>
+                        <h1 className='text-xl font-bold'>Login as</h1>
+                        <p className='text-xs text-gray-300'>Login as a member or guest account</p>
+                        <div className='flex py-8 gap-4 px-2'>
+                          <button onClick={() => { setTab('login') }} className="w-1/2 flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
+                            Member
+                          </button>
+                          <button className="w-1/2 flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
+                            Guest
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      tab === 'login' ? (
+                        <div>
+                          <h1 className='text-xl font-bold'>Login</h1>
+                          <p className='text-xs text-gray-300'>Login with your account</p>
+                          <div className='flex flex-col text-left py-8 gap-4 px-2'>
+                            <div>
+                              <label htmlFor="username">
+                                Username
+                              </label>
+                              <input id="username" name="username" className="mt-1 w-full py-2 px-4 rounded-md" type="text" placeholder="Username" />
+                            </div>
+                            <div>
+                              <label htmlFor="password">
+                                Password
+                              </label>
+                              <input id="password" name="password" className="mt-1 w-full py-2 px-4 rounded-md" type="password" placeholder="Password" />
+                            </div>
+                            <div>
+                              <button className="w-full flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
+                                Login
+                              </button>
+                            </div>
+                            <div>
+                              <p className='text-xs text-gray-300'>Doesn't have account? <button onClick={() => { setTab('register') }}>Register</button> or <button onClick={() => { setTab(null) }}>Go Back</button></p>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div>
+                          <h1 className='text-xl font-bold'>Register</h1>
+                          <p className='text-xs text-gray-300'>Register a account</p>
+                          <div className='flex flex-col text-left py-8 gap-4 px-2'>
+                            <div>
+                              <label htmlFor="username">
+                                Username
+                              </label>
+                              <input id="username" name="username" className="mt-1 w-full py-2 px-4 rounded-md" type="text" placeholder="Username" />
+                            </div>
+                            <div>
+                              <label htmlFor="email">
+                                Email
+                              </label>
+                              <input id="email" name="email" className="mt-1 w-full py-2 px-4 rounded-md" type="email" placeholder="Email (Optional)" />
+                            </div>
+                            <div>
+                              <label htmlFor="password">
+                                Password
+                              </label>
+                              <input id="password" name="password" className="mt-1 w-full py-2 px-4 rounded-md" type="password" placeholder="Password" />
+                            </div>
+                            <div>
+                              <button className="w-full flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
+                                Register
+                              </button>
+                            </div>
+                            <div>
+                              <p className='text-xs text-gray-300'>Already have an account? <button onClick={() => { setTab('login') }}>Login</button> or <button onClick={() => { setTab(null) }}>Go Back</button></p>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    )
+                  }
+                  <p className='text-xs text-gray-300'>This site uses cookies to store user identity.</p>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
