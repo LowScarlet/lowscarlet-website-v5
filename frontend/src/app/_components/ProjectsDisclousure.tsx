@@ -2,23 +2,29 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { MdOutlineArrowDownward, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { FiGithub } from 'react-icons/fi';
+import { AiOutlineLink } from 'react-icons/ai';
 import { Disclosure, Transition } from "@headlessui/react";
+import ProjectsModal from "./ProjectsModal";
 
 export default function ProjectDisclosure({
   children,
+  id,
   title,
   icon,
   badges,
   href
 }: {
   children?: ReactNode,
+  id: string,
   title: ReactNode,
   icon: string,
   badges: Array<ReactNode>,
   href: string
 }) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   return (
     <Disclosure>
       {({ open }) => (<>
@@ -65,9 +71,20 @@ export default function ProjectDisclosure({
                 <p className="dark:text-gray-300 text-gray-500">
                   {children}
                 </p>
-                <Link href={href} className="flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
-                  <MdOutlineArrowDownward className='' /> Read More..
-                </Link>
+                <div className="flex gap-2">
+                  <Link target="_blank" href={''} className="flex flex-row items-center justify-start gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-3 py-2.5">
+                    <FiGithub className='text-2xl' />
+                  </Link>
+                  <Link target="_blank" href={''} className="flex flex-row items-center justify-start gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-3 py-2.5">
+                    <AiOutlineLink className='text-2xl' />
+                  </Link>
+                  <button onClick={() => {
+                    setIsModalOpen(true)
+                  }} className="grow w-full flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
+                    <MdOutlineArrowDownward className='' /> Read More..
+                  </button>
+                </div>
+                <ProjectsModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} projectId={id} />
               </div>
             </div>
           </Disclosure.Panel>

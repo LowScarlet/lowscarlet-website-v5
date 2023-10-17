@@ -4,9 +4,61 @@
 
 import Image from "next/image";
 import { BiSticker } from 'react-icons/bi';
-import { AiOutlineClose, AiOutlineSend } from 'react-icons/ai';
-import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import { AiOutlineClose, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
+import { ChangeEvent, Dispatch, Fragment, SetStateAction, useState } from "react";
 import { Dialog, Tab, Transition } from "@headlessui/react";
+
+const chats = [
+  {
+    id: 6,
+    avatar: null,
+    username: 'Sahrul',
+    type: 'sticker',
+    content: 'love-ya'
+  },
+  {
+    id: 5,
+    avatar: null,
+    username: 'Sahrul',
+    type: 'text',
+    content: 'no prob'
+  },
+  {
+    id: 4,
+    avatar: null,
+    username: 'LowScarlet',
+    type: 'text',
+    content: 'thanku'
+  },
+  {
+    id: 3,
+    avatar: null,
+    username: 'Sahrul',
+    type: 'sticker',
+    content: 'love-ya'
+  },
+  {
+    id: 2,
+    avatar: null,
+    username: 'LowScarlet',
+    type: 'sticker',
+    content: 'love-ya'
+  },
+  {
+    id: 1,
+    avatar: null,
+    username: 'LowScarlet',
+    type: 'text',
+    content: 'Good Game!!'
+  },
+]
+const stickers = [
+  'cool-blob.png',
+  'dance-blob.png',
+  'happy-ghast.png',
+  'miku-w.png',
+  'party.png'
+]
 
 export default function CommentsModal({
   isOpen,
@@ -17,57 +69,13 @@ export default function CommentsModal({
 }) {
   const [isStickersOpen, setIsStickersOpen] = useState(false)
   const [isAuthOpen, setIsAuthOpen] = useState(false)
-  const chats = [
-    {
-      id: 6,
-      avatar: null,
-      username: 'Sahrul',
-      type: 'sticker',
-      content: 'love-ya'
-    },
-    {
-      id: 5,
-      avatar: null,
-      username: 'Sahrul',
-      type: 'text',
-      content: 'no prob'
-    },
-    {
-      id: 4,
-      avatar: null,
-      username: 'LowScarlet',
-      type: 'text',
-      content: 'thanku'
-    },
-    {
-      id: 3,
-      avatar: null,
-      username: 'Sahrul',
-      type: 'sticker',
-      content: 'love-ya'
-    },
-    {
-      id: 2,
-      avatar: null,
-      username: 'LowScarlet',
-      type: 'sticker',
-      content: 'love-ya'
-    },
-    {
-      id: 1,
-      avatar: null,
-      username: 'LowScarlet',
-      type: 'text',
-      content: 'Good Game!!'
-    },
-  ]
-  const stickers = [
-    'cool-blob.png',
-    'dance-blob.png',
-    'happy-ghast.png',
-    'miku-w.png',
-    'party.png'
-  ]
+
+  const [commentInput, setCommentInput] = useState<string | undefined>('');
+
+  const handleCommentInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setCommentInput(event.target.value);
+  };
+
   return (<>
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={() => {
@@ -180,14 +188,20 @@ export default function CommentsModal({
                   <div className="flex justify-center items-center gap-2 py-2 px-4">
                     <div className="h-8 w-8 rounded-full dark:bg-dark-calm bg-neutral-200"></div>
                     <div className="grow">
-                      <input id="comment" name="comment" autoComplete="off" type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Comments..." />
+                      <input value={commentInput} onChange={handleCommentInput} id="comment" name="comment" autoComplete="off" type="text" className="w-full bg-transparent py-2 focus:outline-none" placeholder="Comments..." />
                     </div>
                     <div className="flex gap-2">
                       <button onClick={() => { setIsStickersOpen(true) }}>
                         <BiSticker className='text-2xl' />
                       </button>
-                      <button onClick={() => { setIsAuthOpen(true) }}>
-                        <AiOutlineSend className='text-2xl' />
+                      <button className="text-2xl" onClick={() => { setIsAuthOpen(true) }}>
+                        {
+                          commentInput ? (
+                            <AiOutlineSend />
+                          ) : (
+                            <AiOutlineHeart />
+                          )
+                        }
                       </button>
                     </div>
                   </div>

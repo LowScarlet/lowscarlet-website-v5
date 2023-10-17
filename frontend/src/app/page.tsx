@@ -15,6 +15,7 @@ import Badge from "./_components/Badge";
 import ProjectDisclosure from "./_components/ProjectsDisclousure";
 import { useState } from "react";
 import CommentsModal from "./_components/CommentsModal";
+import ProjectsModal from "./_components/ProjectsModal";
 
 const count_projects = 16
 const projects = [
@@ -87,8 +88,9 @@ const social_media = [
 ]
 
 export default function Home() {
-  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false)
   const [love, setLove] = useState(0)
+
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false)
 
   return (<>
     <main className="max-w-md mx-auto px-4 select-none">
@@ -161,6 +163,7 @@ export default function Home() {
             projects.map((item, index) => (
               <ProjectDisclosure
                 key={index}
+                id={index.toString()}
                 title={item.title}
                 icon={item.icon}
                 badges={item.badges}
