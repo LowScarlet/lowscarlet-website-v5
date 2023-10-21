@@ -2,13 +2,12 @@
 
 import { Disclosure, Transition } from "@headlessui/react";
 import Image from "next/image";
-import Link from "next/link";
 import { AiOutlineLink } from 'react-icons/ai';
 import { FiGithub } from 'react-icons/fi';
-import { MdOutlineArrowDownward, MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import Badge from "../Badge";
 import { techs } from "../Techs";
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import ProjectsModal from "./ProjectsModal";
 import { BiExpandAlt } from "react-icons/bi";
 import Button from "../Button";

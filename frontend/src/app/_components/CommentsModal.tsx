@@ -6,7 +6,7 @@ import Image from "next/image";
 import { BiSticker } from 'react-icons/bi';
 import { AiOutlineClose, AiOutlineHeart, AiOutlineSend } from 'react-icons/ai';
 import { ChangeEvent, Dispatch, Fragment, SetStateAction, useState } from "react";
-import { Dialog, Tab, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 
 const chats = [
   {

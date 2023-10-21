@@ -4,7 +4,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { PiCrownSimpleBold } from 'react-icons/pi';
 import { FiGithub, FiInstagram, FiMail } from 'react-icons/fi';
 import { BiExpandAlt, BiLogoLinkedin } from 'react-icons/bi';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';

@@ -9,11 +9,9 @@ import { AiOutlineClose, AiOutlineLink } from 'react-icons/ai';
 
 import { Dispatch, Fragment, SetStateAction } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import Link from "next/link";
 import { projectModal } from './Projects';
 import Badge from '../Badge';
 import { techs } from '../Techs';
-import { BiExpandAlt } from "react-icons/bi";
 import Button from "../Button";
 
 export default function ProjectsModal({
