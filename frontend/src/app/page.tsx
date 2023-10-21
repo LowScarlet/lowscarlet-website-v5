@@ -4,66 +4,18 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { TbBrandNextjs } from 'react-icons/tb';
-import { SiExpress, SiPrisma } from 'react-icons/si';
+import { PiCrownSimpleBold } from 'react-icons/pi';
 import { FiGithub, FiInstagram, FiMail } from 'react-icons/fi';
-import { MdOutlineArrowDownward, MdWhatsapp } from 'react-icons/md';
-import { BiLogoLinkedin } from 'react-icons/bi';
+import { BiExpandAlt, BiLogoLinkedin } from 'react-icons/bi';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { TypeAnimation } from "react-type-animation";
 import Badge from "./_components/Badge";
-import ProjectDisclosure from "./_components/ProjectsDisclousure";
 import { useState } from "react";
 import CommentsModal from "./_components/CommentsModal";
-import ProjectsModal from "./_components/ProjectsModal";
+import React from "react";
+import Projects from "./_components/projects/Projects";
+import { techs } from "./_components/Techs";
 
-const count_projects = 16
-const projects = [
-  {
-    title: 'PumpkinProject',
-    icon: '/pp.png',
-    badges: [
-      <Badge key={0} title="Private" icon={<FiGithub />} />,
-      <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
-      <Badge key={2} title="Express.js" icon={<SiExpress />} />
-    ],
-    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    href: '/projects/pumpkinproject',
-  },
-  {
-    title: 'Pumpkincraft',
-    icon: '/pp.png',
-    badges: [
-      <Badge key={0} title="Private" icon={<FiGithub />} />,
-      <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
-      <Badge key={2} title="Express.js" icon={<SiExpress />} />
-    ],
-    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    href: '/projects/pumpkincraft',
-  },
-  {
-    title: 'Etika Chat',
-    icon: '/pp.png',
-    badges: [
-      <Badge key={0} title="Private" icon={<FiGithub />} />,
-      <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
-      <Badge key={2} title="Express.js" icon={<SiExpress />} />
-    ],
-    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    href: '/projects/etikachat',
-  },
-  {
-    title: 'Chatify',
-    icon: '/pp.png',
-    badges: [
-      <Badge key={0} title="Private" icon={<FiGithub />} />,
-      <Badge key={1} title="Next.js" icon={<TbBrandNextjs />} />,
-      <Badge key={2} title="Express.js" icon={<SiExpress />} />
-    ],
-    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    href: '/projects/chatify',
-  },
-]
 const social_media = [
   {
     href: 'https://github.com/LowScarlet',
@@ -78,10 +30,6 @@ const social_media = [
     icon: <BiLogoLinkedin className='text-2xl' />,
   },
   {
-    href: 'https://wa.me/6281270634992',
-    icon: <MdWhatsapp className='text-2xl' />,
-  },
-  {
     href: 'mailto:tegarmaulanafahreza.email@gmail.com',
     icon: <FiMail className='text-2xl' />,
   },
@@ -92,15 +40,24 @@ export default function Home() {
 
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false)
 
+  const { nextJs, expressJs, prismaOrm } = techs
+
   return (<>
     <main className="max-w-md mx-auto px-4 select-none">
       <div className="py-10">
         <div className="flex items-center space-x-2">
-          <div className="h-12 w-12 rounded-full overflow-hidden">
-            <Image width={100} height={100} quality={100} src={"/pp.png"} alt={"/pp.png"} />
-          </div>
+          <button className="group">
+            <div className="relative h-12 w-12 rounded-full overflow-hidden hover:opacity-50 transition duration-300 ease-in-out">
+              <Image width={100} height={100} quality={100} src={"/pp.png"} alt={"/pp.png"} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <BiExpandAlt className="opacity-0 group-hover:opacity-100 text-xl transition duration-300 transition-opacity" />
+              </div>
+            </div>
+          </button>
           <div className="grow">
-            <h1 className="text-base font-bold dark:text-white text-gray-700">Tegar Maulana Fahreza</h1>
+            <h1 className="text-base font-bold dark:text-white text-gray-700">
+              Tegar Maulana Fahreza
+            </h1>
             <p className="text-sm dark:text-gray-400 text-gray-500">@LowScarlet</p>
           </div>
           <button
@@ -136,13 +93,13 @@ export default function Home() {
             ]}
             speed={40}
             repeat={Infinity}
-          />.
+          />
         </h2>
         <p className="pb-4">
           I'm Tegar, an Indonesian web developer with a deep passion for technology. I enjoy crafting functional and visually appealing websites.
         </p>
         <p>
-          Currently working in a small and messing project with <Badge title="Next.js" icon={<TbBrandNextjs />}></Badge>, <Badge title="Express.js" icon={<SiExpress />}></Badge>, <Badge title="Prisma ORM" icon={<SiPrisma />}></Badge> & some other tooling.
+          Currently working in a small and messing project with <Badge title={nextJs.title} icon={nextJs.icon} href={nextJs.link} />, <Badge title={expressJs.title} icon={expressJs.icon} href={expressJs.link} />, <Badge title={prismaOrm.title} icon={prismaOrm.icon} href={prismaOrm.link} /> & some other tooling.
         </p>
       </div>
       <div className="py-8">
@@ -157,26 +114,7 @@ export default function Home() {
         </div>
       </div>
       <div className="pb-10">
-        <h1 className="text-2xl font-bold dark:text-white text-gray-700">Projects ({count_projects})</h1>
-        <div className="flex flex-col py-4">
-          {
-            projects.map((item, index) => (
-              <ProjectDisclosure
-                key={index}
-                id={index.toString()}
-                title={item.title}
-                icon={item.icon}
-                badges={item.badges}
-                href={item.href}
-              >
-                {item.context}
-              </ProjectDisclosure>
-            ))
-          }
-        </div>
-        <Link href={""} className="flex flex-row items-center justify-center gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-1.5 py-1.5">
-          <MdOutlineArrowDownward className='' /> Load More..
-        </Link>
+        <Projects />
       </div>
     </main>
 
