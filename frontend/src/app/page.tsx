@@ -14,6 +14,8 @@ import CommentsModal from "./_components/CommentsModal";
 import React from "react";
 import Projects from "./_components/projects/Projects";
 import { techs } from "./_components/Techs";
+import { imageModal } from "./_components/imageViewers/imageViewerInterface";
+import ImageViewerModal from "./_components/imageViewers/imageViewerModal";
 
 const social_media = [
   {
@@ -37,6 +39,11 @@ const social_media = [
 export default function Home() {
   const [love, setLove] = useState(0)
 
+  const [isImageViewerModal, setIsImageViewerModal] = useState<imageModal>({
+    isOpen: false,
+    image: null
+  })
+
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false)
 
   const { nextJs, expressJs, prismaOrm } = techs
@@ -45,7 +52,15 @@ export default function Home() {
     <main className="max-w-md mx-auto px-4 select-none">
       <div className="py-10">
         <div className="flex items-center space-x-2">
-          <button className="group">
+          <button className="group" onClick={() => {
+            setIsImageViewerModal({
+              isOpen: true,
+              image: {
+                title: 'Profile Page',
+                url: '/images/pp.png'
+              }
+            })
+          }}>
             <div className="relative h-12 w-12 rounded-full overflow-hidden hover:opacity-50 transition duration-300 ease-in-out">
               <Image width={100} height={100} quality={100} src={"/pp.png"} alt={"/pp.png"} />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -119,5 +134,6 @@ export default function Home() {
 
     {/* Modals */}
     <CommentsModal isOpen={isCommentModalOpen} setIsOpen={setIsCommentModalOpen} />
+    <ImageViewerModal modal={isImageViewerModal} setModal={setIsImageViewerModal} />
   </>)
 }
