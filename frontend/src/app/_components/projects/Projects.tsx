@@ -11,28 +11,10 @@ import React, { useState } from "react";
 import ProjectsModal from "./ProjectsModal";
 import { BiExpandAlt } from "react-icons/bi";
 import Button from "../Button";
+import { projects, projectModal } from "./ProjectsInterface";
 
 function timeout(delay: number) {
   return new Promise(res => setTimeout(res, delay))
-}
-
-export interface project {
-  id: number,
-  title: string,
-  icon: string | null,
-  isOpenSource: boolean,
-  link: {
-    source: string | null,
-    project: string | null,
-  },
-  techStacks: Array<string>,
-  since: string,
-  context: string
-}
-
-export interface projects {
-  _count?: number
-  data: Array<project>
 }
 
 const projects: projects = {
@@ -71,11 +53,6 @@ const projects: projects = {
       context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     },
   ]
-}
-
-export interface projectModal {
-  isOpen: boolean,
-  project: project | null
 }
 
 export default function Projects() {

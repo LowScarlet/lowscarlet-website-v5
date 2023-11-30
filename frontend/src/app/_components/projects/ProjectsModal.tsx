@@ -2,14 +2,13 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-
 import Image from "next/image";
 import { FiGithub } from 'react-icons/fi';
 import { AiOutlineClose, AiOutlineLink } from 'react-icons/ai';
 
 import { Dispatch, Fragment, SetStateAction } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { projectModal } from './Projects';
+import { projectModal } from './ProjectsInterface';
 import Badge from '../Badge';
 import { techs } from '../Techs';
 import Button from "../Button";
