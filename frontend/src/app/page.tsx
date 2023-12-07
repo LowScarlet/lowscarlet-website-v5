@@ -12,7 +12,7 @@ import Badge from "./_components/Badge";
 import { useState } from "react";
 import CommentsModal from "./_components/CommentsModal";
 import React from "react";
-import Projects from "./_components/projects/Projects";
+import Projects from "./_components/projects/Project";
 import { techs } from "./_components/Techs";
 import { imageModal } from "./_components/imageViewers/imageViewerInterface";
 import ImageViewerModal from "./_components/imageViewers/imageViewerModal";

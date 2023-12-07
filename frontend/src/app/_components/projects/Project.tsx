@@ -8,10 +8,10 @@ import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowRight } from 'react-i
 import Badge from "../Badge";
 import { techs } from "../Techs";
 import React, { useState } from "react";
-import ProjectsModal from "./ProjectsModal";
+import ProjectsModal from "./ProjectModal";
 import { BiExpandAlt } from "react-icons/bi";
 import Button from "../Button";
-import { projects, projectModal } from "./ProjectsInterface";
+import { projects, projectModal } from "./ProjectInterface";
 
 function timeout(delay: number) {
   return new Promise(res => setTimeout(res, delay))

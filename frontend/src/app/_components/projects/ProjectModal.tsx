@@ -8,7 +8,7 @@ import { AiOutlineClose, AiOutlineLink } from 'react-icons/ai';
 
 import { Dispatch, Fragment, SetStateAction } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { projectModal } from './ProjectsInterface';
+import { projectModal } from './ProjectInterface';
 import Badge from '../Badge';
 import { techs } from '../Techs';
 import Button from "../Button";

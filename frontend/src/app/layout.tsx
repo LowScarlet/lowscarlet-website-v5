@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: "Hi 👋, I am Tegar Maulana Fahreza, a web developer from Indonesia.",
     siteName: "LowScarlet",
     images: [
-      '/pp.png'
+      'images/pp.png'
     ]
   },
   twitter: {
