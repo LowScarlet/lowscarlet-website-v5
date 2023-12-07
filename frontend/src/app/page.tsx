@@ -131,9 +131,5 @@ export default function Home() {
         <Projects />
       </div>
     </main>
-
-    {/* Modals */}
-    <CommentsModal isOpen={isCommentModalOpen} setIsOpen={setIsCommentModalOpen} />
-    <ImageViewerModal modal={isImageViewerModal} setModal={setIsImageViewerModal} />
   </>)
 }
