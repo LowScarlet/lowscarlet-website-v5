@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Hanken_Grotesk } from 'next/font/google'
+import listClassName from './utils/listClassName'
 
 const hanken_grotesk = Hanken_Grotesk({ subsets: ['latin'] })
 
@@ -32,8 +33,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className='transition duration-300 ease-in-out dark:bg-dark-calm bg-white'>
-      <body className={hanken_grotesk.className}>{children}</body>
+    <html
+      lang="en"
+      className={
+        listClassName([
+          'transition duration-300 ease-in-out',
+          'dark:bg-dark-calm bg-white'
+        ])
+      }
+    >
+      <body className={
+        hanken_grotesk.className
+      }>
+        {children}
+      </body>
     </html>
   )
 }

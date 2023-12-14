@@ -2,20 +2,48 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"
 
-import Link from "next/link";
-import Image from "next/image";
+import { BiLogoLinkedin } from 'react-icons/bi';
 import { FiGithub, FiInstagram, FiMail } from 'react-icons/fi';
-import { BiExpandAlt, BiLogoLinkedin } from 'react-icons/bi';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { TypeAnimation } from "react-type-animation";
-import Badge from "./_components/Badge";
-import { useState } from "react";
-import CommentsModal from "./_components/CommentsModal";
-import React from "react";
-import Projects from "./_components/projects/Projects";
-import { techs } from "./_components/Techs";
-import { imageModal } from "./_components/imageViewers/imageViewerInterface";
-import ImageViewerModal from "./_components/imageViewers/imageViewerModal";
+import { TypeAnimation } from 'react-type-animation';
+import Badge from './components/Badge';
+import Header from './components/Header';
+import { nextJs, expressJs, prismaOrm } from "./components/Techs";
+import listClassName from "./utils/listClassName";
+import Button from './components/Button';
+import Projects from './components/projects/Projects';
+import Project from './components/projects/Project';
+import React from 'react';
+
+const subDescription = (<>
+  Currently working in a small and messing project with <Badge title={nextJs.title} icon={nextJs.icon} href={nextJs.link} />, <Badge title={expressJs.title} icon={expressJs.icon} href={expressJs.link} />, <Badge title={prismaOrm.title} icon={prismaOrm.icon} href={prismaOrm.link} /> & some other tooling.
+</>)
+
+const mainDescription = "Hi, I'm Tegar, an Indonesian web magician passionate about crafting visually stunning and functional websites that seamlessly blend technology and artistry."
+
+const heading = (<>
+  I make <TypeAnimation
+    className={
+      listClassName([
+        'bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500',
+        'text-2xl text-transparent'
+      ])
+    }
+    preRenderFirstString={true}
+    sequence={[
+      'websites',
+      1000,
+      'frontends',
+      1000,
+      'backends',
+      1000,
+      'apps',
+      1000,
+    ]}
+    speed={40}
+    repeat={Infinity}
+    cursor={true}
+  />
+</>)
 
 const social_media = [
   {
@@ -36,100 +64,145 @@ const social_media = [
   },
 ]
 
+export interface project {
+  id: number,
+  title: string,
+  icon: string | null,
+  isOpenSource: boolean,
+  link: {
+    source: string | null,
+    project: string | null,
+  },
+  techStacks: Array<string>,
+  loves: number,
+  comments: number,
+  since: string,
+  context: string
+}
+
+export interface projects {
+  _count?: number
+  data: Array<project>
+}
+
+const projects: projects = {
+  _count: 16,
+  data: [
+    {
+      id: 1,
+      title: 'Pumpkin Project',
+      icon: null,
+      isOpenSource: false,
+      link: {
+        source: null,
+        project: null
+      },
+      techStacks: [
+        'nextJs',
+        'expressJs'
+      ],
+      loves: 12,
+      comments: 9,
+      since: '',
+      context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+    {
+      id: 2,
+      title: 'Etika Chat',
+      icon: null,
+      isOpenSource: false,
+      link: {
+        source: null,
+        project: null
+      },
+      techStacks: [
+        'nextJs',
+        'expressJs'
+      ],
+      loves: 12,
+      comments: 9,
+      since: '',
+      context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    },
+  ]
+}
+
 export default function Home() {
-  const [love, setLove] = useState(0)
-
-  const [isImageViewerModal, setIsImageViewerModal] = useState<imageModal>({
-    isOpen: false,
-    image: null
-  })
-
-  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false)
-
-  const { nextJs, expressJs, prismaOrm } = techs
-
   return (<>
-    <main className="max-w-md mx-auto px-4 select-none">
-      <div className="py-10">
-        <div className="flex items-center space-x-2">
-          <button className="group" onClick={() => {
-            setIsImageViewerModal({
-              isOpen: true,
-              image: {
-                title: 'Profile Page',
-                url: '/images/pp.png'
-              }
-            })
-          }}>
-            <div className="relative h-12 w-12 rounded-full overflow-hidden hover:opacity-50 transition duration-300 ease-in-out">
-              <Image width={100} height={100} quality={100} src={"/pp.png"} alt={"/pp.png"} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <BiExpandAlt className="opacity-0 group-hover:opacity-100 text-xl transition duration-300 transition-opacity" />
-              </div>
-            </div>
-          </button>
-          <div className="grow">
-            <h1 className="text-base font-bold dark:text-white text-gray-700">
-              Tegar Maulana Fahreza
+    <div className={
+      listClassName([
+        'max-w-md mx-auto',
+        'select-none'
+      ])
+    }>
+      <div className={
+        listClassName([
+          'px-4 py-10 flex flex-col gap-y-10'
+        ])
+      }>
+        <Header />
+
+        <main className={
+          listClassName([
+            'flex flex-col gap-y-10',
+            'text-xl dark:text-gray-400 text-gray-700'
+          ])
+        }>
+          <section className={
+            listClassName([
+              'flex flex-col gap-y-4'
+            ])
+          }>
+            <h1 className={
+              listClassName([
+                'font-bold'
+              ])
+            }>
+              {heading}
             </h1>
-            <p className="text-sm dark:text-gray-400 text-gray-500">@LowScarlet</p>
-          </div>
-          <button
-            onClick={() => {
-              setIsCommentModalOpen(true)
-            }}
-            className="transition duration-300 ease-in-out h-12 w-12 rounded-full overflow-hidden flex justify-center items-center group hover:cursor-pointer dark:text-gray-400 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 dark:hover:text-white hover:brightness-150"
-          >
-            <div>
-              <div className="flex justify-center items-center dark:text-current text-violet-500">
-                <AiOutlineHeart className="text-2xl font-bold group-hover:hidden" />
-                <AiFillHeart className="text-2xl font-bold group-hover:inline hidden" />
-              </div>
-              <h1 className="text-xs font-bold text-center">{love}</h1>
-            </div>
-          </button>
-        </div>
+
+            <p>
+              {mainDescription}
+            </p>
+
+            <p>
+              {subDescription}
+            </p>
+          </section>
+
+          <ul className={
+            listClassName([
+              'flex flex-row gap-2 overflow-x-auto'
+            ])
+          }>
+            {
+              social_media.map((item, index) => (
+                <Button
+                  key={index}
+                  target='_blank'
+                  href={item.href}
+                >
+                  {item.icon}
+                </Button>
+              ))
+            }
+          </ul>
+
+          <Projects>
+            {
+              projects.data.map((project, index) => {
+                return (
+                  <Project
+                    key={index}
+                    index={index}
+                    project={project}
+                  />
+                )
+              })
+            }
+          </Projects>
+        </main>
       </div>
-      <div className="text-xl dark:text-gray-400 text-gray-700">
-        <h2 className="pb-4 font-bold">
-          I make <TypeAnimation
-            className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"
-            preRenderFirstString={true}
-            sequence={[
-              'websites',
-              1000,
-              'frontends',
-              1000,
-              'backends',
-              1000,
-              'apps',
-              1000,
-            ]}
-            speed={40}
-            repeat={Infinity}
-          />
-        </h2>
-        <p className="pb-4">
-          I'm Tegar, an Indonesian web developer with a deep passion for technology. I enjoy crafting functional and visually appealing websites.
-        </p>
-        <p>
-          Currently working in a small and messing project with <Badge title={nextJs.title} icon={nextJs.icon} href={nextJs.link} />, <Badge title={expressJs.title} icon={expressJs.icon} href={expressJs.link} />, <Badge title={prismaOrm.title} icon={prismaOrm.icon} href={prismaOrm.link} /> & some other tooling.
-        </p>
-      </div>
-      <div className="py-8">
-        <div className="flex flex-row mt-3 gap-3 overflow-x-auto py-2">
-          {
-            social_media.map((item, index) => (
-              <Link target="_blank" key={index} href={item.href} className="flex flex-row items-center justify-start gap-2.5 border text-neutral-900 dark:text-neutral-100 dark:border-neutral-700 border-neutral-200 dark:bg-neutral-700 bg-neutral-50 dark:hover:bg-neutral-900 transition duration-300 ease-in-out rounded-md px-3 py-2.5">
-                {item.icon}
-              </Link>
-            ))
-          }
-        </div>
-      </div>
-      <div className="pb-10">
-        <Projects />
-      </div>
-    </main>
+    </div>
   </>)
 }
