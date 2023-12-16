@@ -2,8 +2,12 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"
 
+import Image from 'next/image';
 import { BiLogoLinkedin } from 'react-icons/bi';
 import { FiGithub, FiInstagram, FiMail } from 'react-icons/fi';
+import { PiCertificate } from "react-icons/pi";
+import { TbSql } from "react-icons/tb";
+import { CgWebsite } from "react-icons/cg";
 import { TypeAnimation } from 'react-type-animation';
 import Badge from './components/Badge';
 import Header from './components/Header';
@@ -21,7 +25,7 @@ const subDescription = (<>
 const mainDescription = "Hi, I'm Tegar, an Indonesian web magician passionate about crafting visually stunning and functional websites that seamlessly blend technology and artistry."
 
 const heading = (<>
-  I make <TypeAnimation
+  I love building <TypeAnimation
     className={
       listClassName([
         'bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500',
@@ -131,7 +135,7 @@ export default function Home() {
   return (<>
     <div className={
       listClassName([
-        'max-w-md mx-auto',
+        'max-w-md mx-auto min-h-screen flex items-center justify-center',
         'select-none'
       ])
     }>

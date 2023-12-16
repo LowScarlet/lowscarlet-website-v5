@@ -5,7 +5,7 @@ import { TbBrandNextjs } from "react-icons/tb"
 
 export const nextJs = {
   title: 'Next.js',
-  icon: <TbBrandNextjs />,
+  icon: <TbBrandNextjs className='fill-black stroke-white' />,
   link: 'https://nextjs.org/'
 }
 

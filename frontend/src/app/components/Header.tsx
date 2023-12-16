@@ -28,7 +28,7 @@ export default function Header({
   return (<>
     <header className={
       listClassName([
-        'flex items-center space-x-2'
+        'flex items-center space-x-2 '
       ])
     }>
       <button
